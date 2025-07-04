@@ -128,13 +128,6 @@ cancel_request(request_id="123e4567-e89b-12d3-a456-426614174000")
 delete_request(request_id="123e4567-e89b-12d3-a456-426614174000")
 ```
 
-## Phone Number Formats
-
-Supported phone number formats:
-- International: `+33123456789`
-- French format: `01.23.45.67.89`
-- Simple format: `0123456789`
-
 ## Security Features
 
 - API key authentication via `X-API-Key` header
@@ -150,7 +143,6 @@ Supported phone number formats:
 
 ## Notes
 
-- Integrates with DocDocDoc staging environment by default
 - All operations work with live API endpoints
 - Supports full CRUD operations for document requests
 - Request cancellation preserves data while marking as cancelled
