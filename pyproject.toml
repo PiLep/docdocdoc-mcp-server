@@ -1,0 +1,13 @@
+[project]
+name = "docdocdoc-mcp-server"
+version = "0.1.0"
+description = "DocDocDoc MCP Server - A document request SaaS platform"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp",
+    "requests",
+]
+
+[project.scripts]
+mcp = "main:main"
