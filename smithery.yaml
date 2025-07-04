@@ -1,0 +1,24 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => ({command: 'python3', args: ['main.py'], env: {API_KEY: config.apiKey, BASE_URL: config.baseUrl}})
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - apiKey
+    properties:
+      apiKey:
+        type: string
+        description: DocDocDoc API key
+      baseUrl:
+        type: string
+        default: https://staging.docdocdoc.com
+        description: DocDocDoc API base URL
+  exampleConfig:
+    apiKey: YOUR_API_KEY_HERE
+    baseUrl: https://staging.docdocdoc.com
