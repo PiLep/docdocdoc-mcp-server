@@ -1,4 +1,6 @@
 # DocDocDoc MCP Server
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fdocdocdoc.fr&up_message=online&down_message=offline&label=docdocdoc.fr)](https://docdocdoc.fr)
+[![smithery badge](https://smithery.ai/badge/@Kanta-Inc/docdocdoc-mcp-server)](https://smithery.ai/server/@Kanta-Inc/docdocdoc-mcp-server)
 
 A Model Context Protocol server for the DocDocDoc API that enables document request management.
 
