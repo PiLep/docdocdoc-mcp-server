@@ -1,0 +1,97 @@
+# Cursor Rules for Conventional Commits
+
+## Commit Message Format
+
+ALWAYS use the Conventional Commits format for all commit messages:
+
+```
+type(scope): description
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Required Commit Types:
+
+- **feat**: New feature
+- **fix**: Bug fix
+- **docs**: Documentation only changes
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, etc.)
+- **refactor**: Code change that neither fixes a bug nor adds a feature
+- **test**: Adding missing tests or correcting existing tests
+- **chore**: Maintenance tasks (build, dependencies, etc.)
+- **perf**: Performance improvements
+- **ci**: Changes to CI/CD files
+- **build**: Changes affecting the build system
+- **revert**: Reverts a previous commit
+
+### Scope (optional):
+
+Indicates the part of the code affected: `api`, `auth`, `tools`, `config`, `docs`, etc.
+
+### Description:
+
+- Use imperative present tense ("add" not "added" or "adds")
+- No capital letter at the beginning
+- No period at the end
+- Maximum 50 characters
+- In English for consistency
+
+### Body (optional):
+
+- Separate title from body with a blank line
+- Explain the "what" and "why", not the "how"
+- Use imperative present tense
+- Wrap at 72 characters per line
+
+### Footer (optional):
+
+- Use for breaking changes: `BREAKING CHANGE: description`
+- Or to reference issues: `Closes #123`
+
+## Valid Commit Examples:
+
+```
+feat(auth): add user authentication with JWT tokens
+
+fix: resolve memory leak in document upload
+
+docs: update README with installation instructions
+
+style: format code with prettier
+
+refactor(api): extract request validation logic
+
+test: add unit tests for cancel_request tool
+
+chore: update dependencies to latest versions
+
+perf(tools): optimize request processing speed
+
+ci: add automated testing workflow
+
+build: configure uv for dependency management
+
+revert: revert "feat(auth): add user authentication"
+
+feat(tools): add cancel_request functionality
+
+BREAKING CHANGE: change API endpoint from /requests to /request
+```
+
+## Invalid Commit Examples:
+
+❌ `Updated README`  
+❌ `Fix bug`  
+❌ `Added new feature for users`  
+❌ `feat: Added user authentication.`  
+❌ `FIX: resolve issue with API`
+
+## Special Instructions:
+
+1. **Always** propose a commit message in Conventional Commits format
+2. If the user requests a commit without specifying format, automatically use Conventional Commits
+3. For breaking changes, ALWAYS add `BREAKING CHANGE:` in the footer
+4. If multiple files are modified with different types, make separate commits
+5. Use the most appropriate scope based on the modified files 

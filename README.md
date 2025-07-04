@@ -1,6 +1,6 @@
 # DocDocDoc MCP Server
 
-A comprehensive document request SaaS platform MCP server implementing the full DocDocDoc API specification.
+A Model Context Protocol server for the DocDocDoc API that enables document request management.
 
 ## Overview
 
@@ -8,42 +8,19 @@ DocDocDoc is a document request service that allows users to request documents f
 
 ## Features
 
-- **Request Management**: Create, read, update, delete document requests
-- **Document Handling**: Upload, download, and manage documents
-- **Access Control**: Secure access links with expiration dates
-- **Webhook Support**: Real-time notifications for events
-- **Status Tracking**: Complete request lifecycle management
+- **Request Management**: Create, read, update, delete, and cancel document requests
+- **Status Tracking**: Monitor request lifecycle 
 - **Document Types**: Support for specific document types (ID cards, passports, etc.)
+- **API Integration**: Full integration with DocDocDoc staging API
 
 ## Available Tools
 
 ### Request Operations
 - `create_request` - Create a new document request
-- `get_request` - Get request details with optional related data
+- `get_request` - Get request details by ID
 - `update_request` - Update request information
-- `delete_request` - Delete a request and all associated data
+- `delete_request` - Delete a request permanently
 - `cancel_request` - Cancel a request (sets status to cancelled)
-- `list_requests` - List all requests with optional status filtering
-
-### Document Operations
-- `upload_request_document` - Upload a document to a request
-- `get_request_document` - Get document details
-- `delete_request_document` - Delete a document
-- `download_request_document` - Get document download information
-
-### Access Management
-- `get_request_access` - Get access details
-- `delete_request_access` - Revoke access
-- `extend_request_access` - Extend access expiration
-
-### Webhook Operations
-- `list_webhooks` - List all webhooks
-- `create_webhook` - Create a new webhook
-- `get_webhook` - Get webhook details
-- `delete_webhook` - Delete a webhook
-
-### Utility Functions
-- `get_request_stats` - Get platform statistics
 
 ## Data Models
 
@@ -64,19 +41,6 @@ DocDocDoc is a document request service that allows users to request documents f
 - `statutes` - Company statutes
 - `company_registration` - Company registration documents
 - `beneficials_owner_register` - Beneficial owners register
-
-### Access Rights
-- `read` - View only access
-- `write` - Upload documents
-- `manage` - Full management access
-
-## Available Resources
-
-### `request://{request_id}`
-Access detailed information about a specific request.
-
-### `document://{document_id}`
-Access detailed information about a specific document.
 
 ## Installation
 
@@ -106,11 +70,20 @@ Add to your MCP configuration:
         "/path/to/docdocdoc-mcp-server",
         "run",
         "main.py"
-      ]
+      ],
+      "env": {
+        "API_KEY": "your-api-key-here",
+        "BASE_URL": "https://staging.docdocdoc.fr"
+      }
     }
   }
 }
 ```
+
+## Environment Variables
+
+- `API_KEY` - Your DocDocDoc API key (required)
+- `BASE_URL` - API base URL (defaults to https://staging.docdocdoc.fr)
 
 ## Example Usage
 
@@ -127,63 +100,58 @@ create_request(
 )
 ```
 
-### 2. List Pending Requests
+### 2. Get Request Details
 
 ```
-list_requests(status="pending")
+get_request(request_id="123e4567-e89b-12d3-a456-426614174000")
 ```
 
-### 3. Upload a Document
+### 3. Update a Request
 
 ```
-upload_request_document(
+update_request(
   request_id="123e4567-e89b-12d3-a456-426614174000",
-  filename="id_card.pdf",
-  mime_type="application/pdf",
-  size=1024000
+  message="Updated: Please provide your passport instead",
+  document_type="passport"
 )
 ```
 
-### 4. Create a Webhook
+### 4. Cancel a Request
 
 ```
-create_webhook(
-  url="https://your-app.com/webhook",
-  description="Notify when documents are uploaded",
-  active=true
-)
+cancel_request(request_id="123e4567-e89b-12d3-a456-426614174000")
 ```
 
-### 5. Get Request Statistics
+### 5. Delete a Request
 
 ```
-get_request_stats()
+delete_request(request_id="123e4567-e89b-12d3-a456-426614174000")
 ```
 
-## API Compliance
+## Phone Number Formats
 
-This MCP server implements the complete DocDocDoc API specification with:
-
-- ✅ All request operations (CRUD)
-- ✅ Document management
-- ✅ Access control with expiration
-- ✅ Webhook support
-- ✅ Proper status management
-- ✅ Document type validation
-- ✅ File size and type validation
-- ✅ Resource access via MCP resources
+Supported phone number formats:
+- International: `+33123456789`
+- French format: `01.23.45.67.89`
+- Simple format: `0123456789`
 
 ## Security Features
 
-- API key authentication support (via `X-API-Key` header)
-- Access expiration management
-- File type and size validation
-- Webhook secret generation
+- API key authentication via `X-API-Key` header
+- Input validation for emails, phone numbers, and required fields
 - Proper error handling and validation
+
+## Architecture
+
+- **Modular Design**: Clean separation of concerns with dedicated modules
+- **API Client**: Centralized HTTP client for DocDocDoc API
+- **Configuration**: Environment-based configuration management
+- **Error Handling**: Comprehensive validation and error reporting
 
 ## Notes
 
-- File uploads are simulated in the MCP server (metadata only)
-- Actual file storage would be implemented in the web server
-- All data is stored in memory for demonstration purposes
-- In production, use a proper database backend
+- Integrates with DocDocDoc staging environment by default
+- All operations work with live API endpoints
+- Supports full CRUD operations for document requests
+- Request cancellation preserves data while marking as cancelled
+- Request deletion permanently removes data from the system
