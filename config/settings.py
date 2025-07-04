@@ -9,7 +9,7 @@ class Settings:
     
     def __init__(self):
         self.api_key: Optional[str] = os.getenv("API_KEY")
-        self.base_url: str = os.getenv("BASE_URL", "https://staging.docdocdoc.com")
+        self.base_url: str = os.getenv("BASE_URL", "https://staging.docdocdoc.fr")
     
     def validate(self) -> None:
         """Validate required settings."""
