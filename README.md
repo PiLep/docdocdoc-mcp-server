@@ -1,4 +1,5 @@
 # DocDocDoc MCP Server
+[![smithery badge](https://smithery.ai/badge/@Kanta-Inc/docdocdoc-mcp-server)](https://smithery.ai/server/@Kanta-Inc/docdocdoc-mcp-server)
 
 A Model Context Protocol server for the DocDocDoc API that enables document request management.
 
@@ -44,6 +45,15 @@ DocDocDoc is a document request service that allows users to request documents f
 
 ## Installation
 
+### Installing via Smithery
+
+To install docdocdoc-mcp-server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@Kanta-Inc/docdocdoc-mcp-server):
+
+```bash
+npx -y @smithery/cli install @Kanta-Inc/docdocdoc-mcp-server --client claude
+```
+
+### Manual Installation
 ```bash
 uv sync
 ```
